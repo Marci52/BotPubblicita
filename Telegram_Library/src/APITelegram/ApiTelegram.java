@@ -22,7 +22,7 @@ public class ApiTelegram {
     public String baseURL;
     public JSONObject obj;
     public boolean exists;
-    private ClassJson cj;
+    public ClassJson cj;
 
     public ApiTelegram() {
     }
@@ -50,16 +50,20 @@ public class ApiTelegram {
 	sendURL.openStream();
     }
 
-    public String getID() throws MalformedURLException, IOException {
+    public void getUpdates() throws MalformedURLException, IOException {
 	String stringidUrl = baseURL + "getUpdates";
 	URL idURL = new URL(stringidUrl);
 	parse(idURL);
 	if (obj.getJSONArray("result").length() != 0) {
 	    exists = true;
 	    cj.fromJSONArray(obj);
-	    return cj.id;
 	} else {
-	    return null;
+	    exists = false;
 	}
+    }
+
+    public String getID() throws IOException {
+	getUpdates();
+	return cj.id;
     }
 }
