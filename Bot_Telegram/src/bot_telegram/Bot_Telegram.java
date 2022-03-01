@@ -24,12 +24,10 @@ public class Bot_Telegram {
 //        System.out.print("Inserire APIToken: ");
 //        String APIToken = in.nextLine();
 
-        // Connessione al bot
         String APIToken = "5118962240:AAEEF9fGjOdebIFacVwx3Tnwhtc8Oh5aiug";
         ApiTelegram bot = new ApiTelegram(APIToken);
         bot.getID();
 
-        
         if (bot.exists) {
             System.out.println("Pubblicita_5BCattaneo");
             System.out.print("Inserire messaggio da inviare: ");

@@ -13,16 +13,26 @@ import org.json.JSONObject;
  * @author cattaneo_marcello
  */
 public class ClassJson {
+
     public String id;
     public String username;
     public String text;
 
     public ClassJson() {
+	id = "";
+	username = "";
+	text = "";
     }
-    
-    public void setClassJson(JSONObject obj){
-//	id = obj...;
-//	username = obj...;
-//	text = obj...;
+
+    public void setClassJson(JSONObject obj) {
+	id = obj.getJSONObject("result").getJSONObject("chat").getString("id");
+	username = obj.getJSONObject("result").getJSONObject("chat").getString("username");
+	text = obj.getJSONObject("result").getString("text");
+    }
+
+    public void fromJSONArray(JSONObject obj) {
+	id = String.valueOf((obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getJSONObject("chat").getInt("id")));
+	username = obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getJSONObject("chat").getString("username");
+	text = obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getString("text");
     }
 }

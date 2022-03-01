@@ -20,11 +20,9 @@ public class ApiTelegram {
 
     private String APIToken;
     public String baseURL;
-    JSONObject obj;
-    private String chat_id;
-    private String username;
-    private String text;
+    public JSONObject obj;
     public boolean exists;
+    private ClassJson cj;
 
     public ApiTelegram() {
     }
@@ -33,10 +31,8 @@ public class ApiTelegram {
 	this.APIToken = APIToken;
 	baseURL = "https://api.telegram.org/bot" + APIToken + "/";
 	obj = null;
-	chat_id = "";
-	username = "";
-	text = "";
 	exists = false;
+	cj = new ClassJson();
     }
 
     public void parse(URL url) throws IOException {
@@ -60,12 +56,10 @@ public class ApiTelegram {
 	parse(idURL);
 	if (obj.getJSONArray("result").length() != 0) {
 	    exists = true;
-	    chat_id = String.valueOf((obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getJSONObject("chat").getInt("id")));
+	    cj.fromJSONArray(obj);
+	    return cj.id;
 	} else {
-	    exists = false;
-	    chat_id = "";
+	    return null;
 	}
-
-	return chat_id;
     }
 }
