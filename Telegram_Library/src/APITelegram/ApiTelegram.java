@@ -24,6 +24,7 @@ public class ApiTelegram {
     private String chat_id;
     private String username;
     private String text;
+    public boolean exists;
 
     public ApiTelegram() {
     }
@@ -35,6 +36,7 @@ public class ApiTelegram {
 	chat_id = "";
 	username = "";
 	text = "";
+	exists = false;
     }
 
     public void parse(URL url) throws IOException {
@@ -56,7 +58,14 @@ public class ApiTelegram {
 	String stringidUrl = baseURL + "getUpdates";
 	URL idURL = new URL(stringidUrl);
 	parse(idURL);
-	chat_id = String.valueOf(obj.getJSONArray("result").getJSONObject(0).getJSONObject("edited_message").getJSONObject("chat").getInt("id"));
+	if (obj.getJSONArray("result").length() != 0) {
+	    exists = true;
+	    chat_id = String.valueOf((obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getJSONObject("chat").getInt("id")));
+	} else {
+	    exists = false;
+	    chat_id = "";
+	}
+
 	return chat_id;
     }
 }

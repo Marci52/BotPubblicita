@@ -20,14 +20,23 @@ public class Bot_Telegram {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws MalformedURLException, IOException {
-	Scanner in = new Scanner(System.in);
-	System.out.println("Pubblicita_5BCattaneo");
-	System.out.print("Inserire APIToken: ");
-	String APIToken = in.nextLine();
-	ApiTelegram bot = new ApiTelegram(APIToken);
-	System.out.print("Inserire messaggio da inviare: ");
-	String mex = in.nextLine();
-	bot.sendMessage(mex);
-    }
+        Scanner in = new Scanner(System.in);
+//        System.out.print("Inserire APIToken: ");
+//        String APIToken = in.nextLine();
 
+        // Connessione al bot
+        String APIToken = "5118962240:AAEEF9fGjOdebIFacVwx3Tnwhtc8Oh5aiug";
+        ApiTelegram bot = new ApiTelegram(APIToken);
+        bot.getID();
+
+        
+        if (bot.exists) {
+            System.out.println("Pubblicita_5BCattaneo");
+            System.out.print("Inserire messaggio da inviare: ");
+            String mex = in.nextLine();
+            bot.sendMessage(mex);
+        } else {
+            System.out.println("Bot non esistente");
+        }
+    }
 }
