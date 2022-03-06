@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/Utenti.java</file>
+            <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/Salvataggio.java</file>
+            <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/Pubblicita.java</file>
             <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/ApiTelegram.java</file>
+            <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/XMLClass.java</file>
+            <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/Utente.java</file>
             <file>file:/home/marcello/Downloads/Github/BotPubblicita/Telegram_Library/src/APITelegram/ClassJson.java</file>
         </group>
     </open-files>

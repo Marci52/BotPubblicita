@@ -7,11 +7,11 @@ package bot_telegram;
 import APITelegram.*;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -22,28 +22,27 @@ public class JFrameBot extends javax.swing.JFrame {
     /**
      * Creates new form JFrameBot
      */
-    Scanner in = new Scanner(System.in);
     String APIToken = "5118962240:AAEEF9fGjOdebIFacVwx3Tnwhtc8Oh5aiug";
     ApiTelegram bot = new ApiTelegram(APIToken);
     ThreadListen listen = new ThreadListen();
+    Pubblicita pubblicita = new Pubblicita();
+    Salvataggio file = new Salvataggio();
 
-    public JFrameBot() throws IOException {
+    public JFrameBot() throws IOException, InterruptedException {
         initComponents();
 
         bot.getID();
 
-        // Connessione
         connect();
-        
+
         listen.start();
     }
 
-    public void connect() {
-        if (bot.exists) {
-            lblTitle.setText("Pubblicita_Cattaneo_Bot");
-        } else {
+    public void connect() throws IOException {
+        if (!bot.exists) {
             JOptionPane.showMessageDialog(this, "Nessun Bot trovato, modificare APIToken", "Errore", JOptionPane.ERROR_MESSAGE);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            file = new Salvataggio();
         }
     }
 
@@ -56,109 +55,171 @@ public class JFrameBot extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        lblInserisci = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtRicerca = new javax.swing.JTextArea();
-        btnRicerca = new javax.swing.JButton();
+        txtRaggio = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtRisultato = new javax.swing.JTextArea();
+        txtNome = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtTesto = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtCitta = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BotPubblicita");
         setAutoRequestFocus(false);
         setLocation(new java.awt.Point(600, 100));
-        setMaximumSize(new java.awt.Dimension(600, 800));
-        setMinimumSize(new java.awt.Dimension(600, 800));
-        setPreferredSize(new java.awt.Dimension(600, 800));
+        setMaximumSize(new java.awt.Dimension(400, 600));
+        setMinimumSize(new java.awt.Dimension(400, 600));
+        setPreferredSize(new java.awt.Dimension(400, 600));
         setResizable(false);
-        setSize(new java.awt.Dimension(600, 800));
+        setSize(new java.awt.Dimension(400, 600));
 
-        lblTitle.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
-        lblTitle.setText("Vuoto");
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 30)); // NOI18N
+        jLabel1.setText("Inserire pubblicita:");
 
-        lblInserisci.setFont(new java.awt.Font("Liberation Sans", 0, 23)); // NOI18N
-        lblInserisci.setText("Inserire citta (/citta nome_citta):");
+        jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        jLabel2.setText("Nome:");
 
-        jScrollPane1.setBorder(new javax.swing.border.MatteBorder(null));
+        jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        jLabel3.setText("Citta:");
+
+        jLabel4.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        jLabel4.setText("Raggio:");
+
+        jLabel5.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        jLabel5.setText("Testo:");
+
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setToolTipText("");
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane1.setFont(new java.awt.Font("Liberation Sans", 0, 40)); // NOI18N
 
-        txtRicerca.setColumns(20);
-        txtRicerca.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
-        txtRicerca.setRows(5);
-        jScrollPane1.setViewportView(txtRicerca);
-
-        btnRicerca.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
-        btnRicerca.setText("Ricerca");
-        btnRicerca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRicercaActionPerformed(evt);
-            }
-        });
+        txtRaggio.setColumns(20);
+        txtRaggio.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        txtRaggio.setRows(5);
+        jScrollPane1.setViewportView(txtRaggio);
 
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        jScrollPane2.setEnabled(false);
 
-        txtRisultato.setEditable(false);
-        txtRisultato.setColumns(20);
-        txtRisultato.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
-        txtRisultato.setRows(5);
-        jScrollPane2.setViewportView(txtRisultato);
+        txtNome.setColumns(20);
+        txtNome.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        txtNome.setRows(5);
+        jScrollPane2.setViewportView(txtNome);
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtTesto.setColumns(20);
+        txtTesto.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        txtTesto.setRows(5);
+        jScrollPane3.setViewportView(txtTesto);
+
+        jScrollPane4.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane4.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        txtCitta.setColumns(20);
+        txtCitta.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        txtCitta.setRows(5);
+        jScrollPane4.setViewportView(txtCitta);
+
+        jButton1.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        jButton1.setText("Inserisci");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Liberation Sans", 0, 25)); // NOI18N
+        jLabel6.setText("Km");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTitle)
-                            .addComponent(lblInserisci)
-                            .addComponent(btnRicerca, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 70, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6))
+                    .addComponent(jLabel5)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTitle)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblInserisci)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRicerca, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRicercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRicercaActionPerformed
-        String input = txtRicerca.getText();
-
-        if (input.length() > 5 && "/citta".equals(input.substring(0, 6))) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (txtNome.getText() != null && txtCitta.getText() != null && txtRaggio.getText() != null && txtTesto.getText() != null) {
             try {
-                bot.sendMessage(input.substring(7, input.length()));
+                Pubblicita pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParserConfigurationException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SAXException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            try {
+                pubblicita.invio(file.getUtenti());
             } catch (IOException ex) {
                 Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        } else {
-            JOptionPane.showMessageDialog(this, "Sintassi comando non corretta", "errore", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnRicercaActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,18 +255,28 @@ public class JFrameBot extends javax.swing.JFrame {
                     new JFrameBot().setVisible(true);
                 } catch (IOException ex) {
                     Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRicerca;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel lblInserisci;
-    private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextArea txtRicerca;
-    private javax.swing.JTextArea txtRisultato;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextArea txtCitta;
+    private javax.swing.JTextArea txtNome;
+    private javax.swing.JTextArea txtRaggio;
+    private javax.swing.JTextArea txtTesto;
     // End of variables declaration//GEN-END:variables
 }

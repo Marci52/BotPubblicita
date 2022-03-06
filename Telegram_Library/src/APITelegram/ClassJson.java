@@ -24,15 +24,22 @@ public class ClassJson {
 	text = "";
     }
 
+    public ClassJson(String id, String username, String text) {
+	this.id = id;
+	this.username = username;
+	this.text = text;
+    }
+
     public void setClassJson(JSONObject obj) {
 	id = obj.getJSONObject("result").getJSONObject("chat").getString("id");
 	username = obj.getJSONObject("result").getJSONObject("chat").getString("username");
 	text = obj.getJSONObject("result").getString("text");
     }
 
-    public void fromJSONArray(JSONObject obj) {
-	id = String.valueOf((obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getJSONObject("chat").getInt("id")));
-	username = obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getJSONObject("chat").getString("username");
-	text = obj.getJSONArray("result").getJSONObject(0).getJSONObject("message").getString("text");
+    public ClassJson fromJSONArray(JSONObject obj, int i) {
+	id = String.valueOf((obj.getJSONArray("result").getJSONObject(i).getJSONObject("message").getJSONObject("chat").getInt("id")));
+	username = obj.getJSONArray("result").getJSONObject(i).getJSONObject("message").getJSONObject("chat").getString("username");
+	text = obj.getJSONArray("result").getJSONObject(i).getJSONObject("message").getString("text");
+	return new ClassJson(id, username, text);
     }
 }

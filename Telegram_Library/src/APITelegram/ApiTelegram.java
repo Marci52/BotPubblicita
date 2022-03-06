@@ -56,7 +56,9 @@ public class ApiTelegram {
 	parse(idURL);
 	if (obj.getJSONArray("result").length() != 0) {
 	    exists = true;
-	    cj.fromJSONArray(obj);
+	    for (int i = 0; i < obj.getJSONArray("result").length(); i++) {
+		cj.fromJSONArray(obj, i);
+	    }
 	} else {
 	    exists = false;
 	}
