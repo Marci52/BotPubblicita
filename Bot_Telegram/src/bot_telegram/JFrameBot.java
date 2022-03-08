@@ -35,6 +35,8 @@ public class JFrameBot extends javax.swing.JFrame {
 
         connect();
 
+        file.getUtenti();
+
         listen.start();
     }
 
@@ -193,32 +195,32 @@ public class JFrameBot extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (txtNome.getText() != null && txtCitta.getText() != null && txtRaggio.getText() != null && txtTesto.getText() != null) {
-            try {
-                Pubblicita pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
-            } catch (IOException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParserConfigurationException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SAXException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
-            } catch (IOException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParserConfigurationException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SAXException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//        if (txtNome.getText() != null && txtCitta.getText() != null && txtRaggio.getText() != null && txtTesto.getText() != null) {
 
-            try {
-                pubblicita.invio(file.getUtenti());
-            } catch (IOException ex) {
-                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
+//            } catch (IOException ex) {
+//                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (ParserConfigurationException ex) {
+//                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (SAXException ex) {
+//                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+        try {
+            pubblicita = new Pubblicita("nome", "arosio", "10", "testo");
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
         }
+        try {
+            pubblicita.invio(file.getUtenti());
+        } catch (IOException ex) {
+            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

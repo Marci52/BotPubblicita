@@ -26,6 +26,13 @@ public class Utente {
     }
 
     public String toCSV() {
-	return id + ";" + username + ";" + lat + ";" + lon;
+	return id + ";" + username + ";" + lat + ";" + lon + ";";
     }
+
+    @Override
+    public String toString() {
+	return "Utente{" + "id=" + id + ", username=" + username + ", lat=" + lat + ", lon=" + lon + '}';
+    }
+    
+    
 }

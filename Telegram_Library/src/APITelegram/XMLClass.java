@@ -55,8 +55,6 @@ public class XMLClass {
 	url += citta + "&format=xml&addressdetails=1";
 	ris_xml = getXMLfromURL(url);
 	parseXML();
-	
-	
     }
     public void parseXML() throws ParserConfigurationException, org.xml.sax.SAXException, IOException {
 
@@ -66,7 +64,7 @@ public class XMLClass {
 
 	Element root = document.getDocumentElement();
 	NodeList nl1 = root.getElementsByTagName("place");
-
+	
 	Element element1;
 	element1 = (Element) nl1.item(0);
 	latitudine = element1.getAttribute("lat");

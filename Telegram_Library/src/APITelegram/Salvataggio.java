@@ -27,12 +27,16 @@ public class Salvataggio {
 	if (!file.exists()) {
 	    file.createNewFile();
 	}
-
 	in = new BufferedReader(new FileReader(file));
 	contenuto = "";
-	while (in.readLine() != null) {
-	    contenuto = in.readLine();
+	String temp = "";
+	while (temp != null) {
+	    temp = in.readLine();
+	    if (temp != null) {
+		contenuto += temp + "\n";
+	    }
 	}
+	in.close();
     }
 
     public void salva(String input) throws IOException {
@@ -47,10 +51,17 @@ public class Salvataggio {
     public Utenti getUtenti() throws IOException {
 	Utenti listaUtenti = new Utenti();
 
-	while (in.readLine() != null) {
-	    Utente u = fromCSV(in.readLine());
-	    listaUtenti.add(u);
-	}
+	in = new BufferedReader(new FileReader(file));
+	
+	String temp = "";
+	while (temp != null) {
+	    temp = in.readLine();
+	    if (temp != null) {
+		Utente u = fromCSV(temp);
+		listaUtenti.add(u);
+    	    }
+	}	
+	
 	return listaUtenti;
     }
 
