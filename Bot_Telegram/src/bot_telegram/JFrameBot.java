@@ -207,7 +207,7 @@ public class JFrameBot extends javax.swing.JFrame {
 //                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
 //            }
         try {
-            pubblicita = new Pubblicita("nome", "arosio", "10", "testo");
+            pubblicita = new Pubblicita("nome", "arosio", "10", "Ciao");
         } catch (IOException ex) {
             Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParserConfigurationException ex) {
