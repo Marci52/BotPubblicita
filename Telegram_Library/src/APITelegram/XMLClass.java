@@ -36,13 +36,14 @@ public class XMLClass {
 	ris_xml = "";
     }
 
+    // Lettura della risposta della richiesta XML
     public String getXMLfromURL(String url) throws MalformedURLException, IOException {
 	Scanner in;
 	String ris = "";
 	URL u = new URL(url);
 
 	in = new Scanner(u.openStream());
-	in.useDelimiter("\u001a"); 
+	in.useDelimiter("\u001a");
 
 	ris = in.next();
 	in.close();
@@ -50,12 +51,16 @@ public class XMLClass {
 	return ris;
     }
 
+    // Invio di una richiesta al webservice
     public void sendMessage(String citta) throws IOException, ParserConfigurationException, SAXException {
+	// """ URL ENCODER
 	citta = citta.replace(' ', '+');
 	url += citta + "&format=xml&addressdetails=1";
 	ris_xml = getXMLfromURL(url);
 	parseXML();
     }
+
+    // Deserealize XML
     public void parseXML() throws ParserConfigurationException, org.xml.sax.SAXException, IOException {
 
 	DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -64,7 +69,7 @@ public class XMLClass {
 
 	Element root = document.getDocumentElement();
 	NodeList nl1 = root.getElementsByTagName("place");
-	
+
 	Element element1;
 	element1 = (Element) nl1.item(0);
 	latitudine = element1.getAttribute("lat");

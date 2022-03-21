@@ -29,10 +29,14 @@ public class Utente {
 	return id + ";" + username + ";" + lat + ";" + lon + ";";
     }
 
+    public Utente utenteFromCSV(String linea) {
+	String campi[] = linea.split(";");
+	return new Utente(campi[0], campi[1], campi[2], campi[3]);
+    }
+
     @Override
     public String toString() {
 	return "Utente{" + "id=" + id + ", username=" + username + ", lat=" + lat + ", lon=" + lon + '}';
     }
-    
-    
+
 }

@@ -26,26 +26,11 @@ public class JFrameBot extends javax.swing.JFrame {
     ApiTelegram bot = new ApiTelegram(APIToken);
     ThreadListen listen = new ThreadListen();
     Pubblicita pubblicita = new Pubblicita();
-    Salvataggio file = new Salvataggio();
+    GestioneFile file = new GestioneFile();
 
     public JFrameBot() throws IOException, InterruptedException {
         initComponents();
-
-        bot.getID();
-
-        connect();
-
-        file.getUtenti();
-
         listen.start();
-    }
-
-    public void connect() throws IOException {
-        if (!bot.exists) {
-            JOptionPane.showMessageDialog(this, "Nessun Bot trovato, modificare APIToken", "Errore", JOptionPane.ERROR_MESSAGE);
-            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-            file = new Salvataggio();
-        }
     }
 
     /**
@@ -195,32 +180,27 @@ public class JFrameBot extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-//        if (txtNome.getText() != null && txtCitta.getText() != null && txtRaggio.getText() != null && txtTesto.getText() != null) {
-
-//            try {
-//                pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
-//            } catch (IOException ex) {
-//                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (ParserConfigurationException ex) {
-//                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-//            } catch (SAXException ex) {
-//                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-        try {
-            pubblicita = new Pubblicita("nome", "arosio", "10", "Ciao");
-        } catch (IOException ex) {
-            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+        if (!txtNome.getText().isEmpty() && !txtCitta.getText().isEmpty() && !txtRaggio.getText().isEmpty() && !txtTesto.getText().isEmpty()) {
+            try {
+                pubblicita = new Pubblicita(txtNome.getText(), txtCitta.getText(), txtRaggio.getText(), txtTesto.getText());
+            } catch (IOException | ParserConfigurationException | SAXException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // Aggiorno listaUtenti
+            try {
+                file.leggi();
+            } catch (IOException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // Invio di una pubblicita agli utenti nel raggio indicato
+            try {
+                pubblicita.invio(file.listaUtenti);
+            } catch (IOException ex) {
+                Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Impossibile inserire pubblicità, controllare i campi", "Errore", JOptionPane.ERROR_MESSAGE);
         }
-        try {
-            pubblicita.invio(file.getUtenti());
-        } catch (IOException ex) {
-            Logger.getLogger(JFrameBot.class.getName()).log(Level.SEVERE, null, ex);
-        }
-//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
